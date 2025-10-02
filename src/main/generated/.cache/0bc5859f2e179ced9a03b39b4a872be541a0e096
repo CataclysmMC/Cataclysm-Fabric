@@ -1,0 +1,7 @@
+// 1.21.8	-999999999-01-01T00:00:00	Cataclysm Fabric/Cataclysm Recipe Provider
+1a7e485b8e979e856e0234c7b08529cdc89f44c3 data/cataclysm/advancement/recipes/building_blocks/paragon_core.json
+7acd39c362f7e2aedd95ada6ebf7a789142a7f2b data/cataclysm/advancement/recipes/misc/paragon_quartz.json
+2ffa084c72d10857990e2046289c387ca894afcc data/cataclysm/advancement/recipes/tools/paragon_blessing.json
+4cc0c46d1b1299ae07e68446d39ba97cfd195ec6 data/cataclysm/recipe/paragon_blessing.json
+d97b702b93a5a60a3582cbd5886ef98b3ba5a5e7 data/cataclysm/recipe/paragon_core.json
+5ef28826175b7b7fb5860b6ec6decd65fb9ffd0a data/cataclysm/recipe/paragon_quartz.json

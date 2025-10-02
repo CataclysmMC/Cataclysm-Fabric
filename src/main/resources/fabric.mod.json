@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "cataclysm",
+  "version": "${version}",
+  "name": "Cataclysm Fabric",
+  "description": "TheCataclysmSMP fabric port with extra content",
+  "authors": [
+    "Pepe3012"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/cataclysm/pack.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.cataclysm.client.data.CataclysmDataGenerator"
+    ],
+    "client": [
+      "org.cataclysm.client.CataclysmClient"
+    ],
+    "main": [
+      "org.cataclysm.Cataclysm"
+    ]
+  },
+  "mixins": [
+    "cataclysm.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

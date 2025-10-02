@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "cataclysm:paragon_quartz",
+    "N": "minecraft:netherite_block"
+  },
+  "pattern": [
+    "###",
+    "#N#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cataclysm:paragon_blessing"
+  }
+}
