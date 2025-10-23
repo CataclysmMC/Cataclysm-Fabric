@@ -1,0 +1,37 @@
+package org.cataclysm.datagen.provider;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import org.cataclysm.server.item.CataclysmItems;
+
+public class CataclysmModelProvider extends FabricModelProvider {
+    public CataclysmModelProvider(FabricDataOutput output) {
+        super(output);
+    }
+
+    @Override
+    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        CataclysmItems.getItemList().stream()
+                .map(Item::asItem)
+                .filter(item -> item instanceof BlockItem)
+                .map(item -> ((BlockItem) item).getBlock())
+                .forEach(blockStateModelGenerator::registerSimpleCubeAll);
+    }
+
+    @Override
+    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        CataclysmItems.getItemList().stream()
+                .filter(item -> !(item instanceof BlockItem)) // evitar duplicar los BlockItem
+                .forEach(item -> itemModelGenerator.register(item, Models.GENERATED));
+    }
+
+    @Override
+    public String getName() {
+        return "Cataclysm Model Provider";
+    }
+}
