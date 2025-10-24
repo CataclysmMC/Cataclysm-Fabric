@@ -7,7 +7,9 @@ import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ToolItem;
 import org.cataclysm.server.item.CataclysmItems;
+import org.jetbrains.annotations.NotNull;
 
 public class CataclysmModelProvider extends FabricModelProvider {
     public CataclysmModelProvider(FabricDataOutput output) {
@@ -15,7 +17,7 @@ public class CataclysmModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+    public void generateBlockStateModels(@NotNull BlockStateModelGenerator blockStateModelGenerator) {
         CataclysmItems.getItemList().stream()
                 .map(Item::asItem)
                 .filter(item -> item instanceof BlockItem)
@@ -26,12 +28,10 @@ public class CataclysmModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         CataclysmItems.getItemList().stream()
-                .filter(item -> !(item instanceof BlockItem)) // evitar duplicar los BlockItem
-                .forEach(item -> itemModelGenerator.register(item, Models.GENERATED));
-    }
-
-    @Override
-    public String getName() {
-        return "Cataclysm Model Provider";
+                .filter(item -> !(item instanceof BlockItem))
+                .forEach(item -> {
+                    if (item instanceof ToolItem) itemModelGenerator.register(item, Models.HANDHELD);
+                    else itemModelGenerator.register(item, Models.GENERATED);
+                });
     }
 }

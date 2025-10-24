@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.custom;
+package org.cataclysm.server.item.custom.util.paragon;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +13,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Rarity;
 import org.cataclysm.global.util.sound.SoundData;
 import org.cataclysm.server.effect.CataclysmEffects;
+import org.cataclysm.server.item.custom.CataclysmItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

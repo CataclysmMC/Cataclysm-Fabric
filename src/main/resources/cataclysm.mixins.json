@@ -4,8 +4,10 @@
   "package": "org.cataclysm.global.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "LivingEntityMixin"
   ],
   "client": [
+    "ClientPlayNetworkMixin"
   ],
   "injectors": {
     "defaultRequire": 1

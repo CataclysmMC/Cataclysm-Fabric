@@ -1,6 +1,14 @@
 {
   "effect.cataclysm.immunity": "Immortality",
   "item.cataclysm.paragon_blessing": "Paragon's Blessing",
+  "item.cataclysm.paragon_key": "Paragon's Key",
   "item.cataclysm.paragon_pearl": "Paragon's Pearl",
-  "item.cataclysm.paragon_quartz": "Paragon's Quartz"
+  "item.cataclysm.paragon_quartz": "Paragon's Quartz",
+  "item.cataclysm.paragon_totem": "Paragon's Totem",
+  "item.cataclysm.twisted_axe": "Twisted Axe",
+  "item.cataclysm.twisted_hoe": "Twisted Hoe",
+  "item.cataclysm.twisted_ingot": "Twisted Ingot",
+  "item.cataclysm.twisted_pickaxe": "Twisted Pickaxe",
+  "item.cataclysm.twisted_shovel": "Twisted Shovel",
+  "item.cataclysm.twisted_sword": "Twisted Sword"
 }

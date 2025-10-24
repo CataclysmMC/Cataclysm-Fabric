@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.custom.paragon;
+package org.cataclysm.server.item.custom.util.paragon;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -6,7 +6,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import org.cataclysm.server.item.custom.ParagonItem;
 import org.jetbrains.annotations.NotNull;
 
 public class ParagonBlessingItem extends ParagonItem {
@@ -23,7 +22,7 @@ public class ParagonBlessingItem extends ParagonItem {
         }
 
         super.applyImmunity(serverWorld, player);
-        player.getItemCooldownManager().set(this, 20);
+        player.getItemCooldownManager().set(this, 10);
         super.consumeItem(player, stack);
 
         return TypedActionResult.pass(stack);

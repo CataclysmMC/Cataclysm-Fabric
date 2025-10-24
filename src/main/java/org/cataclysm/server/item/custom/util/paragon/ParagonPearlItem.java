@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.custom.paragon;
+package org.cataclysm.server.item.custom.util.paragon;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.cataclysm.server.entity.projectile.ParagonPearlEntity;
-import org.cataclysm.server.item.custom.ParagonItem;
 import org.jetbrains.annotations.NotNull;
 
 public class ParagonPearlItem extends ParagonItem {
