@@ -8,7 +8,7 @@ import net.minecraft.data.client.Models;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
-import org.cataclysm.server.registry.item.CataclysmItems;
+import org.cataclysm.global.registry.item.CataclysmItems;
 import org.jetbrains.annotations.NotNull;
 
 public class CataclysmModelProvider extends FabricModelProvider {

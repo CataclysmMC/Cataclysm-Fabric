@@ -6,7 +6,7 @@ import net.minecraft.item.*;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import org.cataclysm.server.registry.item.CataclysmItems;
+import org.cataclysm.global.registry.item.CataclysmItems;
 
 import java.util.concurrent.CompletableFuture;
 

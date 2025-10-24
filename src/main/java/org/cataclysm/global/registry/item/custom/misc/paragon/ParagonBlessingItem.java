@@ -1,4 +1,4 @@
-package org.cataclysm.server.registry.item.custom.util.paragon;
+package org.cataclysm.global.registry.item.custom.misc.paragon;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

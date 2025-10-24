@@ -1,24 +1,28 @@
-package org.cataclysm.server.registry.item.custom.util.paragon;
+package org.cataclysm.global.registry.item.custom.misc.paragon;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Rarity;
 import org.cataclysm.global.util.sound.SoundData;
-import org.cataclysm.server.registry.effect.CataclysmEffects;
-import org.cataclysm.server.registry.item.custom.CataclysmItem;
+import org.cataclysm.global.registry.effect.CataclysmEffects;
+import org.cataclysm.global.registry.item.custom.CataclysmItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class ParagonItem extends CataclysmItem {
+public abstract class ParagonItem extends Item implements CataclysmItem {
     private static final int IMMUNITY_DEFAULT_DURATION = 300;
 
     public ParagonItem(int maxCount) {
@@ -105,5 +109,10 @@ public abstract class ParagonItem extends CataclysmItem {
 
     public static int getImmunityConditionalTicks() {
         return IMMUNITY_DEFAULT_DURATION;
+    }
+
+    public void consumeItem(@NotNull PlayerEntity player, @NotNull ItemStack itemStack) {
+        player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
+        itemStack.decrementUnlessCreative(1, player);
     }
 }

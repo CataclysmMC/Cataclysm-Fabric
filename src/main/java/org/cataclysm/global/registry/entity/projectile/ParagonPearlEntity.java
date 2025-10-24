@@ -1,4 +1,4 @@
-package org.cataclysm.server.registry.entity.projectile;
+package org.cataclysm.global.registry.entity.projectile;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
-import org.cataclysm.server.registry.item.custom.util.paragon.ParagonPearlItem;
+import org.cataclysm.global.registry.item.custom.misc.paragon.ParagonPearlItem;
 import org.jetbrains.annotations.NotNull;
 
 public class ParagonPearlEntity extends EnderPearlEntity {
