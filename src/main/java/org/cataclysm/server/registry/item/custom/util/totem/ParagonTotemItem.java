@@ -1,6 +1,6 @@
-package org.cataclysm.server.item.custom.util.totem;
+package org.cataclysm.server.registry.item.custom.util.totem;
 
-import org.cataclysm.server.item.custom.util.paragon.ParagonItem;
+import org.cataclysm.server.registry.item.custom.util.paragon.ParagonItem;
 
 public class ParagonTotemItem extends ParagonItem implements CataclysmTotemItem {
     public ParagonTotemItem() {

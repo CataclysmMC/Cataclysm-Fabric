@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.group;
+package org.cataclysm.server.registry.item.group;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.Item;
@@ -9,13 +9,13 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.cataclysm.Cataclysm;
-import org.cataclysm.server.item.CataclysmItems;
+import org.cataclysm.server.registry.item.CataclysmItems;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class CataclysmItemGroups {
-    public static final ItemGroup ITEM_GROUP = registerGroup("cataclysm_item_group", "Cataclysm", CataclysmItems.PARAGON_TOTEM, CataclysmItems.getItemList());
+    public static final ItemGroup ITEM_GROUP = registerGroup("cataclysm_item_group", "Cataclysm", CataclysmItems.PARAGON_BLESSING, CataclysmItems.getItemList());
 
     public static void initGroups() {}
 

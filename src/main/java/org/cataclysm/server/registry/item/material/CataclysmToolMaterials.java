@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.material;
+package org.cataclysm.server.registry.item.material;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.block.Block;
@@ -6,7 +6,7 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
-import org.cataclysm.server.item.CataclysmItems;
+import org.cataclysm.server.registry.item.CataclysmItems;
 
 import java.util.Objects;
 import java.util.function.Supplier;

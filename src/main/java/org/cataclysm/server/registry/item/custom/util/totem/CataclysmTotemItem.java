@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.custom.util.totem;
+package org.cataclysm.server.registry.item.custom.util.totem;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;

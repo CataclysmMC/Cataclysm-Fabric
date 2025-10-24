@@ -1,4 +1,4 @@
-package org.cataclysm.server.effect.custom;
+package org.cataclysm.server.registry.effect.custom;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;

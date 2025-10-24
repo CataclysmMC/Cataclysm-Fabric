@@ -1,4 +1,4 @@
-package org.cataclysm.server.item.custom;
+package org.cataclysm.server.registry.item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
