@@ -14,7 +14,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.EntityStatusS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
-import org.cataclysm.global.registry.item.custom.misc.totem.CataclysmTotemItem;
+import org.cataclysm.server.registry.item.custom.misc.CataclysmTotem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -50,7 +50,7 @@ public class ClientPlayNetworkMixin {
 
                 if (entity == client.player) {
                     LivingEntity livingEntity = (LivingEntity) entity;
-                    client.gameRenderer.showFloatingItem(CataclysmTotemItem.getActiveTotemStack(livingEntity));
+                    client.gameRenderer.showFloatingItem(CataclysmTotem.getActiveTotemStack(livingEntity));
                 }
                 break;
 

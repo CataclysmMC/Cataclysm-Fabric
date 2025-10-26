@@ -7,7 +7,9 @@
     "LivingEntityMixin"
   ],
   "client": [
-    "ClientPlayNetworkMixin"
+    "ClientPlayNetworkMixin",
+    "render.ItemRendererMixin",
+    "render.ModelLoaderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -16,9 +16,9 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import org.cataclysm.global.registry.effect.CataclysmEffects;
-import org.cataclysm.global.registry.item.custom.misc.totem.CataclysmTotemItem;
-import org.cataclysm.global.registry.item.custom.misc.totem.ParagonTotemItem;
+import org.cataclysm.server.registry.effect.CataclysmEffects;
+import org.cataclysm.server.registry.item.custom.misc.CataclysmTotem;
+import org.cataclysm.server.registry.item.custom.misc.paragon.ParagonTotem;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -36,7 +36,7 @@ public class LivingEntityMixin {
             return;
         }
 
-        ItemStack totem = CataclysmTotemItem.getActiveTotemStack(entity());
+        ItemStack totem = CataclysmTotem.getActiveTotemStack(entity());
         if (!totem.isEmpty() && world() instanceof ServerWorld serverWorld) {
             this.useTotem(serverWorld, totem);
             cir.setReturnValue(true);
@@ -50,7 +50,7 @@ public class LivingEntityMixin {
         entity().setHealth(1.0F);
         entity().clearStatusEffects();
 
-        if (totem.getItem() instanceof ParagonTotemItem paragon) {
+        if (totem.getItem() instanceof ParagonTotem paragon) {
             world().playSound(null, entity().getBlockPos(), SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1.0F, 0.5F);
             paragon.applyImmunity(serverWorld, entity());
         }

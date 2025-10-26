@@ -7,12 +7,10 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
 import org.cataclysm.Cataclysm;
-import org.cataclysm.global.registry.item.CataclysmItems;
+import org.cataclysm.server.registry.item.CataclysmItems;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public final class CataclysmRecipeProvider extends FabricRecipeProvider {
     public CataclysmRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
