@@ -2,7 +2,7 @@ package org.cataclysm;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
-import org.cataclysm.server.registry.CataclysmRegistry;
+import org.cataclysm.registry.CataclysmRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

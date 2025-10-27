@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cataclysm:item/twisted/shovel/twisted_shovel_0"
+  }
+}

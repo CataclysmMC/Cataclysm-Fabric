@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cataclysm:item/twisted/sword/twisted_sword_1"
+  }
+}

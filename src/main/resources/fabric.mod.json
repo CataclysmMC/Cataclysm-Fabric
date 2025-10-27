@@ -14,16 +14,13 @@
 
   "entrypoints": {
     "fabric-datagen": [
-      "org.cataclysm.datagen.CataclysmDataGenerator"
+      "org.cataclysm.client.CataclysmDataGenerator"
     ],
     "client": [
       "org.cataclysm.client.CataclysmClient"
     ],
     "main": [
       "org.cataclysm.Cataclysm"
-    ],
-    "cardinal-components-entity": [
-      "org.cataclysm.global.component.EntityComponents"
     ]
   },
 
@@ -32,14 +29,8 @@
   ],
 
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": ">=${fabric_version}",
-    "minecraft": "~${minecraft_version}",
-    "cardinal-components-base": ">=6.1.0",
-    "cardinal-components-entity": ">=6.1.0"
-  },
-
-  "custom": {
-    "cardinal-components": []
+    "fabricloader": ">=0.15.0",
+    "fabric": "*",
+    "minecraft": "1.21.1"
   }
 }

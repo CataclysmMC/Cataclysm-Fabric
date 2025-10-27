@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cataclysm:item/twisted/pickaxe/twisted_pickaxe_0"
+  },
+  "overrides": [
+    { "predicate": { "cataclysm:alt_mode": 1 }, "model": "cataclysm:item/twisted_pickaxe_alt" }
+  ]
+}

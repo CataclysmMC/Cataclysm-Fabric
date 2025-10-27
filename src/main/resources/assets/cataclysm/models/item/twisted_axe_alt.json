@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cataclysm:item/twisted/axe/twisted_axe_1"
+  }
+}
