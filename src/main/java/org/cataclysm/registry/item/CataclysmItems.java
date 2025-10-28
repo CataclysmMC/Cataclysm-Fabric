@@ -5,22 +5,29 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.cataclysm.Cataclysm;
+import org.cataclysm.registry.item.custom.calamity.CalamityArmorItem;
 import org.cataclysm.registry.item.custom.misc.LemegetonItem;
-import org.cataclysm.registry.item.custom.tool.twisted.*;
-import org.cataclysm.registry.item.custom.tool.arcane.ArcaneBowItem;
-import org.cataclysm.registry.item.custom.tool.arcane.ArcaneShieldItem;
-import org.cataclysm.registry.item.custom.misc.paragon.ParagonBlessingItem;
-import org.cataclysm.registry.item.custom.misc.paragon.ParagonPearlItem;
-import org.cataclysm.registry.item.custom.misc.paragon.ParagonTotem;
+import org.cataclysm.registry.item.custom.twisted.*;
+import org.cataclysm.registry.item.custom.arcane.ArcaneBowItem;
+import org.cataclysm.registry.item.custom.arcane.ArcaneShieldItem;
+import org.cataclysm.registry.item.custom.paragon.ParagonBlessingItem;
+import org.cataclysm.registry.item.custom.paragon.ParagonPearlItem;
+import org.cataclysm.registry.item.custom.paragon.ParagonTotem;
 import org.cataclysm.registry.item.custom.misc.relic.TwistedChaliceItem;
-import org.cataclysm.registry.item.custom.tool.arcane.ArcaneMaceItem;
-import org.cataclysm.registry.item.custom.tool.arcane.ArcaneTridentItem;
+import org.cataclysm.registry.item.custom.arcane.ArcaneMaceItem;
+import org.cataclysm.registry.item.custom.arcane.ArcaneTridentItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 
 public final class CataclysmItems {
+    public static final Item CALAMITY_HELMET = registerItem("calamity_helmet", new CalamityArmorItem(ArmorItem.Type.HELMET));
+    public static final Item CALAMITY_CHESTPLATE = registerItem("calamity_chestplate", new CalamityArmorItem(ArmorItem.Type.CHESTPLATE));
+    public static final Item CALAMITY_LEGGINGS = registerItem("calamity_leggings", new CalamityArmorItem(ArmorItem.Type.LEGGINGS));
+    public static final Item CALAMITY_BOOTS = registerItem("calamity_boots", new CalamityArmorItem(ArmorItem.Type.BOOTS));
+    public static final Item CALAMITY_INGOT = registerItem("calamity_ingot");
+
     public static final Item ARCANE_TRIDENT = registerItem("arcane_trident", new ArcaneTridentItem());
     public static final Item ARCANE_MACE = registerItem("arcane_mace", new ArcaneMaceItem());
     public static final Item ARCANE_SHIELD = registerItem("arcane_shield", new ArcaneShieldItem());

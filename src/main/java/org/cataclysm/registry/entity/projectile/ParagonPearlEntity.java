@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
-import org.cataclysm.registry.item.custom.misc.paragon.ParagonPearlItem;
+import org.cataclysm.registry.item.custom.paragon.ParagonPearlItem;
 import org.jetbrains.annotations.NotNull;
 
 public class ParagonPearlEntity extends EnderPearlEntity {

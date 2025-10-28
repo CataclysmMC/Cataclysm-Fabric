@@ -6,12 +6,10 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import org.cataclysm.Cataclysm;
-import org.cataclysm.registry.entity.projectile.ArcaneArrowEntity;
 import org.cataclysm.registry.entity.projectile.ArcaneTridentEntity;
 
 public final class CataclysmEntityTypes {
     public static final EntityType<ArcaneTridentEntity> ARCANE_TRIDENT = register("arcane_trident", EntityType.Builder.<ArcaneTridentEntity>create(ArcaneTridentEntity::new, SpawnGroup.MISC).dimensions(0.5f, 0.5f).build());
-    public static final EntityType<ArcaneArrowEntity> ARCANE_ARROW = register("arcane_arrow", EntityType.Builder.create(ArcaneArrowEntity::new, SpawnGroup.MISC).dimensions(0.5F, 0.5F).eyeHeight(0.13F).maxTrackingRange(4).trackingTickInterval(20).build());
 
     public static void registerAllEntityTypes() {}
 

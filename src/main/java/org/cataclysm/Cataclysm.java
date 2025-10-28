@@ -2,7 +2,6 @@ package org.cataclysm;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
-import org.cataclysm.registry.CataclysmRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ public class Cataclysm implements ModInitializer {
 
         LOGGER.info("Initializing Cataclysm...");
 
-        CataclysmRegistry.initRegistries();
+        CataclysmRegistry.registerAll();
 
         final long elapsed = (System.nanoTime() - start) / 1_000_000L;
         LOGGER.info("Cataclysm initialized in {} ms.", elapsed);

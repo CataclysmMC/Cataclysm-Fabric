@@ -31,30 +31,14 @@ public final class CataclysmItemTagProvider extends FabricTagProvider.ItemTagPro
     }
 
     private void configureArcaneItemTags() {
-        this.configureTrident(CataclysmItems.ARCANE_TRIDENT);
+        this.configureItem(CataclysmItems.ARCANE_TRIDENT, ItemTags.TRIDENT_ENCHANTABLE);
+        this.configureItem(CataclysmItems.ARCANE_BOW, ItemTags.BOW_ENCHANTABLE);
         this.configureMace(CataclysmItems.ARCANE_MACE);
-        this.configureItem(CataclysmItems.ARCANE_SHIELD, ItemTags.DURABILITY_ENCHANTABLE);
-        this.configureBow(CataclysmItems.ARCANE_BOW);
-    }
-
-    private void configureTrident(Item item) {
-        this.configureItem(item,
-                ItemTags.TRIDENT_ENCHANTABLE,
-                ItemTags.DURABILITY_ENCHANTABLE
-        );
-    }
-
-    private void configureBow(Item item) {
-        this.configureItem(item,
-                ItemTags.BOW_ENCHANTABLE,
-                ItemTags.DURABILITY_ENCHANTABLE
-        );
     }
 
     private void configureMace(Item item) {
         this.configureItem(item,
                 ItemTags.MACE_ENCHANTABLE,
-                ItemTags.DURABILITY_ENCHANTABLE,
                 ItemTags.SHARP_WEAPON_ENCHANTABLE,
                 ItemTags.WEAPON_ENCHANTABLE,
                 ItemTags.FIRE_ASPECT_ENCHANTABLE);
