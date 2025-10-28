@@ -4,7 +4,7 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.registry.tag.BlockTags;
 
-public final class TwistedPickaxe extends AbstractTwistedTool {
+public final class TwistedPickaxe extends AbstractTwistedItem {
     public TwistedPickaxe() {
         super(new Settings()
                 .attributeModifiers(MiningToolItem.createAttributeModifiers(TOOL_MATERIAL, 1.0F, -2.8F))

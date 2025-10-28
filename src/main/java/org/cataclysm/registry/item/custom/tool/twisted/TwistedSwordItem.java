@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public final class TwistedSwordItem extends AbstractTwistedTool {
+public final class TwistedSwordItem extends AbstractTwistedItem {
     public TwistedSwordItem() {
         super(new Settings()
                 .attributeModifiers(MiningToolItem.createAttributeModifiers(TOOL_MATERIAL, 3, -2.4F))

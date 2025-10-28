@@ -23,14 +23,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public abstract class AbstractTwistedTool extends ToolItem {
+public abstract class AbstractTwistedItem extends ToolItem {
     public static final ToolMaterial TOOL_MATERIAL = CataclysmMaterials.TWISTED;
 
-    public AbstractTwistedTool(Settings settings) {
+    public AbstractTwistedItem(Settings settings) {
         super(TOOL_MATERIAL, settings
                 .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))
-                .rarity(Rarity.RARE)
-                .maxCount(1));
+                .rarity(Rarity.EPIC)
+                .maxCount(1)
+        );
     }
 
     @Override
@@ -66,8 +67,8 @@ public abstract class AbstractTwistedTool extends ToolItem {
         user.getItemCooldownManager().set(this, 5);
 
         float pitch = new Random().nextFloat(1.8F, 2.0F);
-        world.playSound(null, user.capeX, user.capeY, user.capeZ, SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, pitch);
-        world.playSound(null, user.capeX, user.capeY, user.capeZ, SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.PLAYERS, 0.5F, pitch);
+        world.playSound(null, user.capeX, user.capeY, user.capeZ, SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 0.75F, pitch);
+        world.playSound(null, user.capeX, user.capeY, user.capeZ, SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.PLAYERS, 0.75F, pitch);
 
         return TypedActionResult.consume(stack);
     }

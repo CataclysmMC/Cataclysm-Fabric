@@ -1,122 +1,132 @@
 package org.cataclysm.registry.item.custom.tool.arcane;
 
-import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.Unit;
 import net.minecraft.world.World;
-import org.cataclysm.registry.entity.CataclysmEntityTypes;
-import org.cataclysm.registry.entity.projectile.ArcaneArrowEntity;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArcaneBowItem extends BowItem implements ArcaneItem {
-    private static final int TICKS_PER_SECOND = 20;
-    private static final float[] SPREAD = {-10f, 0f, 10f};
-
     public ArcaneBowItem() {
         super(ArcaneItem.getSettings());
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
+    public void onStoppedUsing(ItemStack bow, World world, LivingEntity user, int remainingUseTicks) {
+        if (!(user instanceof PlayerEntity player)) return;
 
-        if (!user.getAbilities().creativeMode) {
-            boolean infinity = hasEnchant(world, stack, Enchantments.INFINITY);
-            int needed = infinity ? 1 : 3;
-            if (user.getInventory().count(Items.SPECTRAL_ARROW) < needed) {
-                return TypedActionResult.fail(stack);
-            }
-        }
+        ItemStack ammo = findSpectralAmmo(player);
+        if (ammo.isEmpty()) return;
 
-        user.setCurrentHand(hand);
-        return TypedActionResult.consume(stack);
-    }
+        int usedTicks = getMaxUseTime(bow, user) - remainingUseTicks;
+        float pull = charge(usedTicks);
+        if (pull < 0.1F) return;
 
-    @Override
-    public void onStoppedUsing(@NotNull ItemStack stack, World world, @NotNull LivingEntity user, int remainingUseTicks) {
         if (!(world instanceof ServerWorld server)) return;
 
-        boolean infinity = hasEnchant(world, stack, Enchantments.INFINITY);
-        boolean flame = hasEnchant(world, stack, Enchantments.FLAME);
-        int punch = getLevel(world, stack, Enchantments.PUNCH);
+        List<ItemStack> shots = loadProjectiles(bow, ammo, player, server);
+        if (shots.isEmpty()) return;
 
-        int charge = getMaxUseTime(stack, user) - remainingUseTicks;
-        float power = getPullProgress(charge);
-        if (power < 0.1F) return;
+        Hand hand = player.getActiveHand() != null ? player.getActiveHand() : Hand.MAIN_HAND;
+        float speed = (pull * 3.0F) * 1.5F;
+        shootAll(server, player, hand, bow, shots, speed, 1.0F, pull >= 1.0F);
 
-        for (float yaw : SPREAD)
-            spawnArcaneArrow(server, user, power, yaw, infinity, punch, flame);
+        playSound(world, user, SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, 1.0F, 1.5F, 2.0F);
+        playSound(world, user, SoundEvents.ENTITY_ARROW_SHOOT, 0.8F, 0.9F, 1.1F);
+    }
 
-        if (!infinity && user instanceof PlayerEntity p)
-            consumeArcaneArrow(p, 3);
+    private static ItemStack findSpectralAmmo(PlayerEntity player) {
+        if (player.isCreative()) return Items.SPECTRAL_ARROW.getDefaultStack();
 
-        playSound(world, user, SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, 1.5F, 0.8F, 1.2F);
+        ItemStack inHand = player.getProjectileType(ItemStack.EMPTY);
+        if (inHand.isOf(Items.SPECTRAL_ARROW)) return inHand;
 
-        if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) {
-            stack.damage(1, user, LivingEntity.getSlotForHand(user.getActiveHand()));
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            ItemStack s = player.getInventory().getStack(i);
+            if (s.isOf(Items.SPECTRAL_ARROW)) return s;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    private static float charge(int ticks) {
+        float t = ticks / 20.0F;
+        t = (t * t + 2.0F * t) / 3.0F;
+        return Math.min(t, 1.0F);
+    }
+
+    private void shootAll(ServerWorld world, LivingEntity shooter, Hand hand, ItemStack bow, List<ItemStack> projectiles, float speed, float inaccuracy, boolean crit) {
+        float spread = EnchantmentHelper.getProjectileSpread(world, bow, shooter, 0.0F);
+        int n = projectiles.size();
+        float step = n <= 1 ? 0.0F : (2.0F * spread) / (n - 1);
+
+        for (int i = 0; i < n; i++) {
+            ItemStack ammo = projectiles.get(i);
+            if (ammo.isEmpty()) continue;
+
+            float yawOffset = (i - (n - 1) * 0.5F) * step;
+            ProjectileEntity proj = createSpectralArrow(world, shooter, bow, ammo, crit);
+            proj.setVelocity(shooter, shooter.getPitch(), shooter.getYaw() + yawOffset, 0.0F, speed, inaccuracy);
+            world.spawnEntity(proj);
         }
     }
 
-    private void playSound(World world, LivingEntity user, SoundEvent sound, float volume, float minPitch, float maxPitch) {
-        float pitch = new Random().nextFloat(minPitch, maxPitch);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), sound, SoundCategory.PLAYERS, volume, pitch);
+    private ProjectileEntity createSpectralArrow(World world, LivingEntity shooter, ItemStack bow, ItemStack ammo, boolean crit) {
+        ArrowItem spectral = (ArrowItem) Items.SPECTRAL_ARROW;
+        PersistentProjectileEntity arrow = spectral.createArrow(world, ammo.isEmpty() ? new ItemStack(Items.SPECTRAL_ARROW) : ammo, shooter, bow);
+        if (crit) arrow.setCritical(true);
+        return arrow;
     }
 
-    private void spawnArcaneArrow(ServerWorld world, LivingEntity shooter, float power, float yawSpread, boolean infinity, int punch, boolean flame) {
-        ArcaneArrowEntity arrow = new ArcaneArrowEntity(CataclysmEntityTypes.ARCANE_ARROW, world);
-        arrow.setOwner(shooter);
-        arrow.setPosition(shooter.getX(), shooter.getEyeY() - 0.1, shooter.getZ());
-        arrow.setCritical(power >= 1.0F);
-        if (flame) arrow.setOnFireFor(5 * TICKS_PER_SECOND);
+    private List<ItemStack> loadProjectiles(ItemStack bow, ItemStack ammo, LivingEntity shooter, ServerWorld server) {
+        if (!ammo.isOf(Items.SPECTRAL_ARROW)) return List.of();
 
-        float speed = power * (3.0F + punch * 0.3F);
+        int count = EnchantmentHelper.getProjectileCount(server, bow, shooter, 1);
+        List<ItemStack> list = new ArrayList<>(count);
 
-        arrow.pickupType = infinity
-                ? PersistentProjectileEntity.PickupPermission.DISALLOWED
-                : PersistentProjectileEntity.PickupPermission.ALLOWED;
+        ItemStack first = takeAmmo(bow, ammo, shooter, server);
+        if (first.isEmpty()) return List.of();
+        list.add(first);
 
-        arrow.setVelocity(shooter, shooter.getPitch(), shooter.getYaw() + yawSpread, 0.0F, speed, 1.0F);
-        world.spawnEntity(arrow);
-    }
-
-    private void consumeArcaneArrow(PlayerEntity player, int n) {
-        var inv = player.getInventory();
-        for (int i = 0; i < inv.size() && n > 0; i++) {
-            ItemStack s = inv.getStack(i);
-            if (s.isOf(Items.SPECTRAL_ARROW)) {
-                int take = Math.min(n, s.getCount());
-                s.decrement(take);
-                n -= take;
-                if (s.isEmpty()) inv.setStack(i, ItemStack.EMPTY);
-            }
+        for (int i = 1; i < count; i++) {
+            ItemStack ghost = new ItemStack(Items.SPECTRAL_ARROW);
+            ghost.set(DataComponentTypes.INTANGIBLE_PROJECTILE, Unit.INSTANCE);
+            list.add(ghost);
         }
+        return list;
     }
 
-    private int getLevel(World world, ItemStack stack, RegistryKey<Enchantment> key) {
-        var reg = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT);
-        var entry = reg.getEntry(key).orElse(null);
-        if (entry == null) return 0;
-        ItemEnchantmentsComponent ench = stack.getEnchantments();
-        return ench.getLevel(entry);
-    }
+    private ItemStack takeAmmo(ItemStack bow, ItemStack ammo, LivingEntity shooter, ServerWorld server) {
+        int use = 0;
 
-    private boolean hasEnchant(World world, ItemStack stack, RegistryKey<Enchantment> key) {
-        return getLevel(world, stack, key) > 0;
+        int infinityLevel = getEnchantmentLevel(server, bow, Enchantments.INFINITY);
+        if (infinityLevel == 0 && shooter instanceof PlayerEntity player && !player.isInCreativeMode()) {
+            use = EnchantmentHelper.getAmmoUse(server, bow, ammo, 1);
+        }
+
+        if (use > ammo.getCount()) return ItemStack.EMPTY;
+
+        if (use == 0) {
+            ItemStack ghost = new ItemStack(Items.SPECTRAL_ARROW);
+            ghost.set(DataComponentTypes.INTANGIBLE_PROJECTILE, Unit.INSTANCE);
+            return ghost;
+        }
+
+        ItemStack consumed = ammo.split(use);
+        if (ammo.isEmpty() && shooter instanceof PlayerEntity p) p.getInventory().removeOne(ammo);
+        return consumed;
     }
 }

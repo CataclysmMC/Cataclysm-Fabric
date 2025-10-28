@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cataclysm:item/twisted/sword/twisted_sword_0"
+  },
+  "overrides": [
+    { "predicate": { "cataclysm:alt_mode": 1 }, "model": "cataclysm:item/twisted_sword_alt" }
+  ]
+}
