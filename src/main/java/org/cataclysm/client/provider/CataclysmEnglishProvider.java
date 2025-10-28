@@ -28,20 +28,28 @@ public class CataclysmEnglishProvider extends FabricLanguageProvider {
 
     private void addEffectTranslations(@NotNull TranslationBuilder builder) {
         builder.add(CataclysmEffects.IMMUNITY.value(), "Immortality");
+        builder.add(CataclysmEffects.MORTEM.value(), "Mortem");
     }
 
     private void addItemTranslations(@NotNull TranslationBuilder builder) {
         this.addArcaneTranslations(builder);
         this.addTwistedTranslations(builder);
+        this.addLemegetonTranslations(builder);
         this.addParagonTranslations(builder);
+    }
+    private void addLemegetonTranslations(TranslationBuilder builder) {
+        builder.add(CataclysmItems.LEMEGETON, "Lemegeton");
+        builder.add(CataclysmItems.CATACLYSM_UPGRADE_TIER_1, "Cataclysm Upgrade");
+        builder.add(CataclysmItems.CATACLYSM_UPGRADE_TIER_2, "Cataclysm Upgrade");
+        builder.add(CataclysmItems.CATACLYSM_UPGRADE_TIER_3, "Cataclysm Upgrade");
     }
     private void addArcaneTranslations(@NotNull TranslationBuilder builder) {
         builder.add(CataclysmItems.ARCANE_MACE, "Arcane Mace");
         builder.add(CataclysmItems.ARCANE_TRIDENT, "Arcane Trident");
         builder.add(CataclysmItems.ARCANE_SHIELD, "Arcane Shield");
         builder.add(CataclysmItems.ARCANE_BOW, "Arcane Bow");
-        builder.add(CataclysmItems.ARCANE_ARROW, "Arcane Arrow");
         builder.add(CataclysmItems.ARCANE_GOLD, "Arcane Gold");
+        builder.add(CataclysmItems.ARCANE_NUGGET, "Arcane Nugget");
     }
     private void addTwistedTranslations(@NotNull TranslationBuilder builder) {
         builder.add(CataclysmItems.TWISTED_SWORD, "Twisted Sword");

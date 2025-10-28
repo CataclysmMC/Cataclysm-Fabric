@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cataclysm:item/misc/cataclysm_upgrade_tier_2"
+  }
+}

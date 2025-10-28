@@ -3,11 +3,13 @@ package org.cataclysm.mixin;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -21,13 +23,17 @@ import org.cataclysm.registry.item.custom.misc.CataclysmTotem;
 import org.cataclysm.registry.item.custom.misc.paragon.ParagonTotem;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin {
+
+    @Shadow
+    public abstract boolean hasStatusEffect(RegistryEntry<StatusEffect> effect);
 
     @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
     private void onTryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
@@ -47,6 +53,12 @@ public class LivingEntityMixin {
     }
     @Unique
     private void useTotem(ServerWorld serverWorld, @NotNull ItemStack totem) {
+        if (!(totem.getItem() instanceof ParagonTotem) && entity().hasStatusEffect(CataclysmEffects.MORTEM)) {
+            world().playSound(null, entity().getBlockPos(), SoundEvents.ENTITY_BLAZE_DEATH, SoundCategory.PLAYERS, 5.0F, 0.5F);
+            world().playSound(null, entity().getBlockPos(), SoundEvents.ITEM_TRIDENT_THUNDER.value(), SoundCategory.PLAYERS, 5.0F, 1.75F);
+            return;
+        }
+
         entity().setHealth(1.0F);
         entity().clearStatusEffects();
 

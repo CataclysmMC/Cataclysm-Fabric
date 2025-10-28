@@ -7,9 +7,11 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.cataclysm.Cataclysm;
 import org.cataclysm.registry.effect.custom.ImmunityStatusEffect;
+import org.cataclysm.registry.effect.custom.MortemStatusEffect;
 
 public class CataclysmEffects {
     public static final RegistryEntry<StatusEffect> IMMUNITY = registerEffect("immunity", new ImmunityStatusEffect());
+    public static final RegistryEntry<StatusEffect> MORTEM = registerEffect("mortem", new MortemStatusEffect());
 
     public static void registerAllEffects() {}
 
