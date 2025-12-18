@@ -14,7 +14,7 @@
 
   "entrypoints": {
     "fabric-datagen": [
-      "org.cataclysm.client.CataclysmDataGenerator"
+      "org.cataclysm.datagen.CataclysmDataGenerator"
     ],
     "client": [
       "org.cataclysm.client.CataclysmClient"
