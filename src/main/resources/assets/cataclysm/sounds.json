@@ -1,0 +1,47 @@
+{
+  "music.nuclear_fusion_redux": {
+    "subtitle": "sounds.cataclysm.nuclear_fusion_redux",
+    "sounds": [
+      {
+        "name": "cataclysm:nuclear_fusion_redux",
+        "stream": true
+      }
+    ]
+  },
+  "music.grandma_destruction": {
+    "subtitle": "sounds.cataclysm.grandma_destruction",
+    "sounds": [
+      {
+        "name": "cataclysm:grandma_destruction",
+        "stream": true
+      }
+    ]
+  },
+  "music.piercing_the_abyss": {
+    "subtitle": "sounds.cataclysm.piercing_the_abyss",
+    "sounds": [
+      {
+        "name": "cataclysm:piercing_the_abyss",
+        "stream": true
+      }
+    ]
+  },
+  "music.ajoura": {
+    "subtitle": "sounds.cataclysm.ajoura",
+    "sounds": [
+      {
+        "name": "cataclysm:ajoura",
+        "stream": true
+      }
+    ]
+  },
+  "music.thats_life": {
+    "subtitle": "sounds.cataclysm.thats_life",
+    "sounds": [
+      {
+        "name": "cataclysm:thats_life",
+        "stream": true
+      }
+    ]
+  }
+}
